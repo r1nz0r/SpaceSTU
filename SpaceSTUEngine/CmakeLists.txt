@@ -1,0 +1,49 @@
+add_library(${SPACE_STU_ENGINE_TARGET_NAME} STATIC
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/Application.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/Application.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/EntryPoint.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/EntryPoint.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/Core.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/Core.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/World.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/World.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/Actor.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/Actor.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/Object.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/Object.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/AssetManager.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/AssetManager.cpp
+)
+
+target_include_directories(${SPACE_STU_ENGINE_TARGET_NAME} PUBLIC 
+    ${CMAKE_CURRENT_SOURCE_DIR}/include
+)
+
+target_link_libraries(${SPACE_STU_ENGINE_TARGET_NAME} PUBLIC sfml-graphics)
+target_link_libraries(${SPACE_STU_ENGINE_TARGET_NAME} PUBLIC sfml-window)
+target_link_libraries(${SPACE_STU_ENGINE_TARGET_NAME} PUBLIC sfml-system)
+target_link_libraries(${SPACE_STU_ENGINE_TARGET_NAME} PUBLIC sfml-main)
+target_link_libraries(${SPACE_STU_ENGINE_TARGET_NAME} PUBLIC sfml-audio)
+target_link_libraries(${SPACE_STU_ENGINE_TARGET_NAME} PUBLIC sfml-network)
+
+function(CopyLibToTarget LIB_NAME TARGET_NAME)
+    add_custom_command(
+        TARGET ${TARGET_NAME}
+        POST_BUILD
+        COMMAND
+        ${CMAKE_COMMAND} -E copy_if_different
+        $<TARGET_FILE:${LIB_NAME}>
+        $<TARGET_FILE_DIR:${TARGET_NAME}>
+    )
+endfunction()
+
+CopyLibToTarget(sfml-graphics ${SPACE_STU_ENGINE_TARGET_NAME})
+CopyLibToTarget(sfml-window ${SPACE_STU_ENGINE_TARGET_NAME})
+CopyLibToTarget(sfml-system ${SPACE_STU_ENGINE_TARGET_NAME})
+CopyLibToTarget(sfml-audio ${SPACE_STU_ENGINE_TARGET_NAME})
