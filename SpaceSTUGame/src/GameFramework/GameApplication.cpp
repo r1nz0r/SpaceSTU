@@ -19,9 +19,10 @@ namespace SSTU
 		if (world.expired())
 			return;
 
-		//world.lock()->SpawnActor<Actor>();
 		actorToDestroy = world.lock()->SpawnActor<Actor>();
 		actorToDestroy.lock()->SetTexture(GetResourceDir() + R"(SpaceShooterRedux/PNG/playerShip2_red.png)");
+		actorToDestroy.lock()->SetLocation({ 300.0f, 490.0f });
+		actorToDestroy.lock()->AddRotationOffset(90.0f);
 	}
 
 	void GameApplication::Tick(float deltaTime)
