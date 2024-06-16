@@ -2,16 +2,24 @@
 #include "Framework/Core.h"
 #include "Framework/AssetManager.h"
 #include "Framework/MathUtility.h"
+#include "Framework/World.h"
+#include "Framework/Application.h"
+#include "Framework/PhysicsSystem.h"
+#include "box2d/b2_body.h"
 
 namespace SSTU
 {
 	Actor::Actor(World* owner, const std::string& texturePath)
-		: m_owner{ owner }
+		: m_ownerWorld{ owner }
 		, m_bBeganPlay{ false }
 		, m_texture{}
 		, m_sprite{}
+		, m_physicsBody{nullptr}
+		, m_bPhysicsEnabled{false}
 
-	{}
+	{
+		SetTexture(texturePath);
+	}
 
 	Actor::~Actor()
 	{
@@ -68,11 +76,13 @@ namespace SSTU
 	void Actor::SetLocation(const sf::Vector2f& location)
 	{
 		m_sprite.setPosition(location);
+		UpdatePhysicsBodyTransform();
 	}
 
 	void Actor::SetRotation(float rotation)
 	{
 		m_sprite.setRotation(rotation);
+		UpdatePhysicsBodyTransform();
 	}
 
 	sf::Vector2f Actor::GetLocation() const
@@ -109,6 +119,73 @@ namespace SSTU
 	{
 		sf::FloatRect bounds = m_sprite.getGlobalBounds();
 		m_sprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
+	}
+
+	bool Actor::IsOutOfWindow() const
+	{
+		sf::Vector2u windowSize = GetWorld()->GetApplication()->GetWindowSize();
+		sf::FloatRect actorSize = GetGlobalBounds();
+		sf::Vector2f actorLocation = GetLocation();
+
+		if (actorLocation.x < -actorSize.width ||
+			actorLocation.x > windowSize.x + actorSize.width ||
+			actorLocation.y < -actorSize.height ||
+			actorLocation.y > windowSize.y + actorSize.height)
+		{
+			return true;
+		}
+		
+		return false;
+	}
+
+	void Actor::SetEnablephysics(bool bState)
+	{
+		m_bPhysicsEnabled = bState;
+		m_bPhysicsEnabled ? EnablePhysics() : DisablePhysics();
+	}
+
+	void Actor::UpdatePhysicsBodyTransform()
+	{
+		if (!m_physicsBody)
+			return;
+
+		float physicsScale = PhysicsSystem::Instance().GetPhysicsScale();
+		b2Vec2 position { GetLocation().x * physicsScale, GetLocation().y * physicsScale };
+		float rotation = Math::DegreesToRadians(GetRotation());
+
+		m_physicsBody->SetTransform(position, rotation);
+	}
+
+	void Actor::OnActorBeginOverlap(Actor* other)
+	{
+		LOG("Overlaped");
+	}
+
+	void Actor::OnActorEndOverlap(Actor* other)
+	{
+		LOG("End overlap");
+	}
+
+	void Actor::Destroy()
+	{
+		DisablePhysics();
+		Object::Destroy();
+	}
+
+	void Actor::EnablePhysics()
+	{
+		if (m_physicsBody)
+			return;
+
+		m_physicsBody = PhysicsSystem::Instance().AddListener(this);
+	}
+	void Actor::DisablePhysics()
+	{
+		if (!m_physicsBody)
+			return;
+
+		PhysicsSystem::Instance().RemoveListener(m_physicsBody);
+		m_physicsBody = nullptr;
 	}
 }
 

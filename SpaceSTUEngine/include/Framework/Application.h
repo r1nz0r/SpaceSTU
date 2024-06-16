@@ -20,6 +20,8 @@ namespace SSTU
         template<typename WorldType>
         std::weak_ptr<WorldType> LoadWorld();
 
+        sf::Vector2u GetWindowSize() const;
+
     private:
         void TickInternal(float deltaTime);
         void RenderInternal();
@@ -44,6 +46,6 @@ namespace SSTU
         auto newWorld = std::make_shared<WorldType>(this);
         m_currentWorld = newWorld;
         m_currentWorld->BeginPlayInternal();
-        return std::weak_ptr<WorldType>(newWorld);
+        return newWorld;
     }
 }

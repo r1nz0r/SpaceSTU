@@ -4,11 +4,23 @@
 namespace SSTU
 {
 	World::World(Application* ownerApp)
-		: m_ownerApp {ownerApp}
-		, m_bBeganPlay {false}
+		: m_ownerApp { ownerApp }
+		, m_bBeganPlay { false }
 		, m_actors {}
 		, m_pendingActors {}
 	{}
+
+	void World::Clean()
+	{
+		for (auto iter = m_actors.begin(); iter != m_actors.end();)
+		{
+			// We need to remove all actors wich were marked for deletion in prev frame.
+			if (iter->get()->IsPendingDestroy())
+				iter = m_actors.erase(iter);
+			else
+				++iter;
+		}
+	}
 
 	void World::Tick(float deltaTime)
 	{
@@ -22,6 +34,7 @@ namespace SSTU
 
 	void World::TickInternal(float deltaTime)
 	{
+		// We need to spawn actors which were added in previous tick to the game.
 		for (auto& actor : m_pendingActors)
 		{
 			m_actors.push_back(actor);
@@ -32,15 +45,8 @@ namespace SSTU
 
 		for (auto iter = m_actors.begin(); iter != m_actors.end();)
 		{
-			if (iter->get()->IsPendingDestroy())
-			{
-				iter = m_actors.erase(iter);
-			}
-			else
-			{
-				iter->get()->TickInternal(deltaTime);
-				++iter;
-			}
+			iter->get()->TickInternal(deltaTime);
+			++iter;
 		}
 
 		Tick(deltaTime);

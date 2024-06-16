@@ -5,6 +5,7 @@
 namespace SSTU
 {
 	class Actor;
+	class PlayerSpaceship;
 	class GameApplication : public Application
 	{
 	public:
@@ -12,6 +13,6 @@ namespace SSTU
 		virtual void Tick(float deltaTime) override;
 	private:
 		float counter;
-		std::weak_ptr<Actor> actorToDestroy;
+		std::weak_ptr<PlayerSpaceship> playerTest;
 	};
 }

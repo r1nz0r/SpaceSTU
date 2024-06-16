@@ -8,7 +8,7 @@ namespace SSTU
 		Object();
 		virtual ~Object();
 
-		void Destroy();
+		virtual void Destroy();
 		bool IsPendingDestroy() const { return m_bIsPendingDestroy; }
 
 	private:

@@ -4,7 +4,7 @@ namespace SSTU
 {
 	AssetManager& AssetManager::Instance()
 	{
-		static std::shared_ptr<AssetManager> sAssetManager { new AssetManager() };
+		static std::unique_ptr<AssetManager> sAssetManager { new AssetManager() };
 		return *sAssetManager;
 	}
 
@@ -15,7 +15,7 @@ namespace SSTU
 			return found->second;
 
 		auto newTexture = std::make_shared<sf::Texture>();		
-		if (newTexture->loadFromFile(path))
+		if (newTexture->loadFromFile(m_rootDirectory + path))
 		{
 			m_loadedTextures[path] = newTexture;
 			return newTexture;
@@ -23,8 +23,9 @@ namespace SSTU
 
 		return nullptr;
 	}
+
 	void AssetManager::Clean()
-	{
+	{		
 		for (auto iter = m_loadedTextures.begin(); iter != m_loadedTextures.end();)
 		{
 			if (iter->second.unique())
@@ -36,4 +37,12 @@ namespace SSTU
 				++iter;			
 		}
 	}
+
+	void AssetManager::SetAssetRootDirectory(const std::string& directory)
+	{
+		m_rootDirectory = directory;
+	}
+
+	AssetManager::AssetManager() : m_rootDirectory {}
+	{}
 }

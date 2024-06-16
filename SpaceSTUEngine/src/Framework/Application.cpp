@@ -2,6 +2,7 @@
 #include "Framework/Core.h"
 #include "Framework/World.h"
 #include "Framework/AssetManager.h"
+#include "Framework/PhysicsSystem.h"
 
 namespace SSTU
 {
@@ -34,6 +35,7 @@ namespace SSTU
 				}
 			}
 
+			// Fixed deltaTime to avoid non-physics behavior
 			float targetDeltaTime = 1.0f / m_targetFrameRate;
 			accumulatedTime += m_tickClock.restart();
 
@@ -46,6 +48,11 @@ namespace SSTU
 		}
 	}
 
+	sf::Vector2u Application::GetWindowSize() const
+	{
+		return m_window.getSize();
+	}
+
 	void Application::TickInternal(float deltaTime)
 	{
 		Tick(deltaTime);
@@ -53,10 +60,18 @@ namespace SSTU
 		if (m_currentWorld)
 			m_currentWorld->TickInternal(deltaTime);
 
+		PhysicsSystem::Instance().Step(deltaTime);
+
+		// We need to clean up assets which are not in use anymore.
+		// Also we need to call Clean method for current world.
+		// We do it after all tick logic is happened.
 		if (m_cleanCycleClock.getElapsedTime() >= m_cleanCycleInterval)
 		{
 			m_cleanCycleClock.restart();
 			AssetManager::Instance().Clean();
+
+			if (m_currentWorld)
+				m_currentWorld->Clean();
 		}
 	}
 

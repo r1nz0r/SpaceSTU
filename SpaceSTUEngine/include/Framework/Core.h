@@ -4,13 +4,16 @@
 #include <memory>
 #include <vector>
 #include <map>
+#include <unordered_set>
 #include <unordered_map>
-
 
 namespace SSTU
 {
 	template<typename T>
 	using List = std::vector<T>;
+
+	template<typename T>
+	using Set = std::unordered_set<T>;
 
 	template<typename Key, typename Value, typename Predicate = std::less<Key>>
 	using SortedDictionary = std::map<Key, Value, Predicate>;
