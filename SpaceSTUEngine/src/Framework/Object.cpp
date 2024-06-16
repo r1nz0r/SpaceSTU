@@ -18,4 +18,14 @@ namespace SSTU
 	{
 		m_bIsPendingDestroy = true;
 	}
+	
+	std::weak_ptr<Object> Object::GetWeakPtr()
+	{
+		return weak_from_this();
+	}
+
+	std::weak_ptr<const Object> Object::GetWeakPtr() const
+	{
+		return weak_from_this();
+	}
 }

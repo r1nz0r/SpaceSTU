@@ -25,6 +25,9 @@ add_library(${SPACE_STU_ENGINE_TARGET_NAME} STATIC
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/PhysicsSystem.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/PhysicsSystem.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/Delegate.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/Delegate.cpp
 )
 
 target_include_directories(${SPACE_STU_ENGINE_TARGET_NAME} PUBLIC 

@@ -37,7 +37,7 @@ namespace SSTU
 	std::weak_ptr<ActorType> World::SpawnActor(Args... args)
 	{
 		static_assert(std::is_base_of<Actor, ActorType>::value, "ActorType must derive from Actor");
-		auto newActor = std::make_shared<ActorType>(this, args...);
+		std::shared_ptr<ActorType> newActor { new ActorType(this, args...) };
 		m_pendingActors.push_back(newActor);
 		return newActor;
 	}
