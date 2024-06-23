@@ -43,11 +43,8 @@ namespace SSTU
 
 		m_pendingActors.clear();
 
-		for (auto iter = m_actors.begin(); iter != m_actors.end();)
-		{
-			iter->get()->TickInternal(deltaTime);
-			++iter;
-		}
+		for (auto iter = m_actors.begin(); iter != m_actors.end(); ++iter)		
+			iter->get()->TickInternal(deltaTime);			
 
 		Tick(deltaTime);
 	}

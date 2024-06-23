@@ -16,6 +16,7 @@ namespace SSTU
 
 	void Object::Destroy()
 	{
+		onDestroy.Notify(this);
 		m_bIsPendingDestroy = true;
 	}
 	

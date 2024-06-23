@@ -20,6 +20,6 @@ namespace SSTU
 
 	template<typename Key, typename Value, typename Hash = std::hash<Key>>
 	using Dictionary = std::unordered_map<Key, Value, Hash>;
-
+	
 	#define LOG(M, ...) printf(M "\n", ##__VA_ARGS__)
 }

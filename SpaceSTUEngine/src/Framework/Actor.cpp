@@ -16,6 +16,7 @@ namespace SSTU
 		, m_sprite{}
 		, m_physicsBody{nullptr}
 		, m_bPhysicsEnabled{false}
+		, m_teamId{GetNeutralTeamId()}
 
 	{
 		SetTexture(texturePath);
@@ -121,16 +122,17 @@ namespace SSTU
 		m_sprite.setOrigin(bounds.width / 2.0f, bounds.height / 2.0f);
 	}
 
-	bool Actor::IsOutOfWindow() const
+	bool Actor::IsOutOfWindow(float allowance) const
 	{
 		sf::Vector2u windowSize = GetWorld()->GetApplication()->GetWindowSize();
 		sf::FloatRect actorSize = GetGlobalBounds();
 		sf::Vector2f actorLocation = GetLocation();
 
-		if (actorLocation.x < -actorSize.width ||
-			actorLocation.x > windowSize.x + actorSize.width ||
-			actorLocation.y < -actorSize.height ||
-			actorLocation.y > windowSize.y + actorSize.height)
+		if (actorLocation.x < -actorSize.width - allowance ||
+			actorLocation.x > windowSize.x + actorSize.width + allowance ||
+			actorLocation.y < -actorSize.height - allowance ||
+			actorLocation.y > windowSize.y + actorSize.height + allowance
+			)
 		{
 			return true;
 		}
@@ -156,12 +158,12 @@ namespace SSTU
 		m_physicsBody->SetTransform(position, rotation);
 	}
 
-	void Actor::OnActorBeginOverlap(Actor* other)
+	void Actor::OnBeginOverlap(Actor* other)
 	{
 		LOG("Overlaped");
 	}
 
-	void Actor::OnActorEndOverlap(Actor* other)
+	void Actor::OnEndOverlap(Actor* other)
 	{
 		LOG("End overlap");
 	}
@@ -170,6 +172,19 @@ namespace SSTU
 	{
 		DisablePhysics();
 		Object::Destroy();
+	}
+
+	bool Actor::IsOtherHostile(Actor* other) const
+	{
+		if (!other || GetTeamId() == GetNeutralTeamId() || other->GetTeamId() == GetNeutralTeamId())
+			return false;
+
+		return GetTeamId() != other->GetTeamId();
+	}
+
+	void Actor::ApplyDamage(float amount)
+	{
+
 	}
 
 	void Actor::EnablePhysics()

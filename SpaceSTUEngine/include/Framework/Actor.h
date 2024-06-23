@@ -32,15 +32,25 @@ namespace SSTU
 		sf::Vector2f GetForwardVector() const;
 		sf::Vector2f GetRightVector() const;
 		sf::FloatRect GetGlobalBounds() const { return m_sprite.getGlobalBounds(); }
-		World* GetWorld() const { return m_ownerWorld; }
+		const World* GetWorld() const { return m_ownerWorld; }
+		World* GetWorld() { return m_ownerWorld; }
 		void CenterPivot();
-		bool IsOutOfWindow() const;
+		bool IsOutOfWindow(float allowance = 10.0f) const;
 
 		void SetEnablephysics(bool bState);
 		void UpdatePhysicsBodyTransform();
-		virtual void OnActorBeginOverlap(Actor* other);
-		virtual void OnActorEndOverlap(Actor* other);
+		virtual void OnBeginOverlap(Actor* other);
+		virtual void OnEndOverlap(Actor* other);
 		virtual void Destroy() override;
+
+		static uint8_t GetNeutralTeamId() { return NEUTRAL_TEAM_ID; }
+		uint8_t GetTeamId() const { return m_teamId; }
+		void SetTeamId(uint8_t teamId) { m_teamId = teamId; }
+		bool IsOtherHostile(Actor* other) const;
+		virtual void ApplyDamage(float amount);
+
+		sf::Sprite& GetSprite() { return m_sprite; }
+		const sf::Sprite& GetSprite() const { return m_sprite; }
 
 	protected:
 		World* m_ownerWorld;
@@ -52,6 +62,8 @@ namespace SSTU
 		sf::Sprite m_sprite;
 		std::shared_ptr<sf::Texture> m_texture;
 		b2Body* m_physicsBody;
+		uint8_t m_teamId;
+		const static uint8_t NEUTRAL_TEAM_ID = 255;
 
 		void EnablePhysics();
 		void DisablePhysics();

@@ -12,6 +12,8 @@ namespace SSTU
 		float GetMaxHealth() const { return m_maxHealth; }
 		
 		Delegate<float, float, float> onHealthChanged;
+		Delegate<float, float, float> onTakenDamage;
+		Delegate<> onHealthEmpty;
 
 	private:
 		void TakeDamage(float amount);

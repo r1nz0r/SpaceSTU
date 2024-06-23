@@ -13,7 +13,9 @@ namespace SSTU
 		, m_owner(owner)
 		, m_speed(speed)
 		, m_damage(damage)
-	{}
+	{
+		SetTeamId(owner->GetTeamId());
+	}
 
 	void Bullet::SetSpeed(float speed)
 	{
@@ -46,5 +48,13 @@ namespace SSTU
 	void Bullet::Move(float deltaTime)
 	{
 		AddLocationOffset(GetForwardVector() * m_speed * deltaTime);
+	}
+	void Bullet::OnBeginOverlap(Actor* other)
+	{
+		if (IsOtherHostile(other))
+		{
+			other->ApplyDamage(GetDamage());
+			Destroy();
+		}
 	}
 }

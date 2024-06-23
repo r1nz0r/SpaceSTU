@@ -1,10 +1,11 @@
 #pragma once
 #include "Framework/Core.h"
-#include "Framework/Object.h"
-#include "functional"
+#include <functional>
 
 namespace SSTU
 {
+	class Object;
+
 	template<typename... Args>
 	class Delegate
 	{

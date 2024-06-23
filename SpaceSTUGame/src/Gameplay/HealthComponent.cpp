@@ -4,8 +4,8 @@
 namespace SSTU
 {
 	HealthComponent::HealthComponent(float health, float maxHealth)
-		: m_health{health}
-		, m_maxHealth{maxHealth}
+		: m_health { health }
+		, m_maxHealth { maxHealth }
 	{}
 
 	void HealthComponent::ChangeHealth(float amount)
@@ -28,24 +28,17 @@ namespace SSTU
 				OnHealthEmpty();
 			}
 		}
-		else
-		{
-			HealthRegen(amount);
-		}
+
+		onHealthChanged.Notify(amount, m_health, m_maxHealth);
 	}
 
 	void HealthComponent::TakeDamage(float amount)
 	{
-		LOG("Took damage: %f, now health is: %f/%f", amount, m_health, m_maxHealth);
+		onTakenDamage.Notify(amount, m_health, m_maxHealth);
 	}
 
 	void HealthComponent::OnHealthEmpty()
 	{
-		LOG("Dead");
-	}
-
-	void HealthComponent::HealthRegen(float amount)
-	{
-		LOG("Heal: %f, now health is: %f/%f", amount, m_health, m_maxHealth);
+		onHealthEmpty.Notify();
 	}
 }

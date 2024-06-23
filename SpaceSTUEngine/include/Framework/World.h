@@ -1,12 +1,13 @@
 #pragma once
 #include <Framework/Core.h>
 #include "SFML/Graphics.hpp"
+#include "Framework/Object.h"
 
 namespace SSTU
 {		
 	class Actor;
 	class Application;	
-	class World
+	class World : public Object
 	{
 	public:
 		World(Application* ownerApp);
@@ -23,8 +24,8 @@ namespace SSTU
 		void Clean();
 
 	private:
-		void Tick(float deltaTime);
-		void BeginPlay();
+		virtual void Tick(float deltaTime);
+		virtual void BeginPlay();
 
 		Application* m_ownerApp;
 		bool m_bBeganPlay;
@@ -37,7 +38,7 @@ namespace SSTU
 	std::weak_ptr<ActorType> World::SpawnActor(Args... args)
 	{
 		static_assert(std::is_base_of<Actor, ActorType>::value, "ActorType must derive from Actor");
-		std::shared_ptr<ActorType> newActor { new ActorType(this, args...) };
+		auto newActor = std::make_shared<ActorType>(this, args...);
 		m_pendingActors.push_back(newActor);
 		return newActor;
 	}

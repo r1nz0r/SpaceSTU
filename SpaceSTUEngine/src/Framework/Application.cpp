@@ -3,6 +3,7 @@
 #include "Framework/World.h"
 #include "Framework/AssetManager.h"
 #include "Framework/PhysicsSystem.h"
+#include "Framework/TimerManager.h"
 
 namespace SSTU
 {
@@ -60,6 +61,7 @@ namespace SSTU
 		if (m_currentWorld)
 			m_currentWorld->TickInternal(deltaTime);
 
+		TimerManager::Instance().UpdateTimer(deltaTime);
 		PhysicsSystem::Instance().Step(deltaTime);
 
 		// We need to clean up assets which are not in use anymore.

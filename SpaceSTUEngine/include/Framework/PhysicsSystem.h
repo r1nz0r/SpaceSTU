@@ -1,12 +1,13 @@
 #pragma once
 #include "Framework/Core.h"
+#include "Framework/NonCopyable.h"
 #include "box2d/b2_world.h"
 
 namespace SSTU
 {
 	class Actor;
 
-	class PhysicsContactListener : public b2ContactListener
+	class PhysicsContactListener : public b2ContactListener, private NonCopyable
 	{
 		virtual void BeginContact(b2Contact* contact) override;
 		virtual void EndContact(b2Contact* contact) override;
@@ -16,11 +17,7 @@ namespace SSTU
 	{
 	public:
 		static PhysicsSystem& Instance();
-		PhysicsSystem(const PhysicsSystem& other) = delete;
-		PhysicsSystem(PhysicsSystem&& other) noexcept = delete;
-		PhysicsSystem& operator=(const PhysicsSystem& other) = delete;
-		PhysicsSystem& operator=(PhysicsSystem&& other) noexcept = delete;
-
+		
 		void Step(float deltaTime);
 		b2Body* AddListener(Actor* listener);
 		void RemoveListener(b2Body* listener);

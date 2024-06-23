@@ -93,10 +93,10 @@ namespace SSTU
 		Actor* ActorB = reinterpret_cast<Actor*>(contact->GetFixtureB()->GetBody()->GetUserData().pointer);
 		
 		if (ActorA && !ActorA->IsPendingDestroy())		
-			ActorA->OnActorBeginOverlap(ActorB);		
+			ActorA->OnBeginOverlap(ActorB);		
 
 		if (ActorB && !ActorB->IsPendingDestroy())		
-			ActorB->OnActorBeginOverlap(ActorA);
+			ActorB->OnBeginOverlap(ActorA);
 	}
 
 	void PhysicsContactListener::EndContact(b2Contact * contact)
@@ -111,9 +111,9 @@ namespace SSTU
 			ActorB = reinterpret_cast<Actor*>(contact->GetFixtureB()->GetBody()->GetUserData().pointer);
 	
 		if (ActorA && !ActorA->IsPendingDestroy())
-			ActorA->OnActorEndOverlap(ActorB);
+			ActorA->OnEndOverlap(ActorB);
 
 		if (ActorB && !ActorB->IsPendingDestroy())
-			ActorB->OnActorEndOverlap(ActorA);
+			ActorB->OnEndOverlap(ActorA);
 	}
 }

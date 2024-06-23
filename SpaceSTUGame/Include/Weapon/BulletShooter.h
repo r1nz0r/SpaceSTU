@@ -12,6 +12,7 @@ namespace SSTU
 
 	private:
 		virtual void ShootImpl() override;
+
 		sf::Clock m_cooldownClock;
 		sf::Time m_cooldownTime;
 	};

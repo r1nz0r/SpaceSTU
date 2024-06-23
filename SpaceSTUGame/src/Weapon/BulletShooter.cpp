@@ -26,8 +26,9 @@ namespace SSTU
 		m_cooldownClock.restart();
 		std::weak_ptr<Bullet> newBullet = 
 			GetOwner()->GetWorld()->SpawnActor<Bullet>(GetOwner(), "SpaceShooterRedux/PNG/Lasers/laserBlue01.png");
-		
-		newBullet.lock()->SetLocation(GetOwner()->GetLocation());
+
+		auto location = GetOwner()->GetLocation() + GetOwner()->GetForwardVector() * 50.0f;
+		newBullet.lock()->SetLocation(location);
 		newBullet.lock()->SetRotation(GetOwner()->GetRotation());
 	}
 }

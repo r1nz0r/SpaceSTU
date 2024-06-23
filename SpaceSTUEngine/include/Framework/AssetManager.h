@@ -1,17 +1,14 @@
 #pragma once
 #include "Framework/Core.h"
 #include "SFML/Graphics.hpp"
+#include "Framework/NonCopyable.h"
 
 namespace SSTU
 {
-	class AssetManager
+	class AssetManager : private NonCopyable
 	{
 	public:
 		static AssetManager& Instance();
-		AssetManager(const AssetManager& other) = delete;
-		AssetManager(AssetManager&& other) noexcept = delete;
-		AssetManager& operator=(const AssetManager& other) = delete;
-		AssetManager& operator=(AssetManager&& other) noexcept = delete;
 
 		// Loads texture from user relative path
 		std::shared_ptr<sf::Texture> LoadTexture(const std::string& path);

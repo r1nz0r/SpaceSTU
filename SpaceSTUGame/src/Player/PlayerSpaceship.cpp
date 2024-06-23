@@ -14,7 +14,7 @@ namespace SSTU
 		, m_speed(200.0f)
 		, m_shooter(new BulletShooter(this, sf::seconds(0.2f)))
 	{
-
+		SetTeamId(1);
 	}
 	void PlayerSpaceship::Tick(float deltaTime)
 	{
