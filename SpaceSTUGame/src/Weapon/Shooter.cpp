@@ -2,6 +2,12 @@
 
 namespace SSTU
 {
+	Shooter::Shooter(Actor* owner)
+		: m_owner(owner)
+		, m_currentLevel{1}
+		, m_maxLevel{4}
+	{}
+
 	void Shooter::Shoot()
 	{
 		if (CanShoot() && !IsOnCooldown())
@@ -9,7 +15,12 @@ namespace SSTU
 			ShootImpl();
 		}
 	}
-	Shooter::Shooter(Actor* owner)
-		: m_owner(owner)
-	{}
+
+	void Shooter::IncrementLevel(int amount)
+	{
+		if (m_currentLevel == m_maxLevel)
+			return;
+
+		++m_currentLevel;
+	}
 }

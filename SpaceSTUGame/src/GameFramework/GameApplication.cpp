@@ -15,7 +15,6 @@ namespace SSTU
 		: Application { 600, 980, "Space STU", sf::Style::Titlebar | sf::Style::Close}		
 	{
 		AssetManager::Instance().SetAssetRootDirectory(GetResourceDir());
-		//counter = 0;
 		auto world = LoadWorld<GameLevelOne>();		
 	}
 }

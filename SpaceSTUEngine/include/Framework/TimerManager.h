@@ -61,7 +61,7 @@ namespace SSTU
 			std::weak_ptr<Object> ptr,
 			void(ClassName::* callback)(),
 			float duration,
-			bool bIsLooping = true
+			bool bIsLooping = false
 		);
 		
 		void ClearTimer(TimerHandler handler);

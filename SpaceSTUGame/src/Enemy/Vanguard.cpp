@@ -5,7 +5,7 @@ namespace SSTU
 {
 	Vanguard::Vanguard(World* owner, const std::string& texturePath, const sf::Vector2f& velocity)
 		: EnemySpaceship(owner, texturePath)
-		, m_shooter { new BulletShooter{this} }
+		, m_shooter { new BulletShooter{this, sf::seconds(1.f), {50.f, 0.f}} }
 	{
 		SetVelocity(velocity);
 		SetRotation(90.f);

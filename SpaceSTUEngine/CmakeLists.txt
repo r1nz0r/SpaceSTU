@@ -38,6 +38,9 @@ add_library(${SPACE_STU_ENGINE_TARGET_NAME} STATIC
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Gameplay/GameStage.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Gameplay/GameStage.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Gameplay/WaitStage.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Gameplay/WaitStage.cpp
 )
 
 target_include_directories(${SPACE_STU_ENGINE_TARGET_NAME} PUBLIC 

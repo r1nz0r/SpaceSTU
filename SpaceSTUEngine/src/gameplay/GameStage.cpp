@@ -10,19 +10,23 @@ namespace SSTU
 
 	void GameStage::Start()
 	{
-		LOG("Stage Started!");
+
 	}
 
 	void GameStage::Tick(float deltaTime)
 	{
-		LOG("Stage Ticking!");
+
+	}
+
+	void GameStage::FinishInternal()
+	{
+		m_bIsStageFinished = true;
+		Finish();
+		onStageFinished.Notify();
 	}
 
 	void GameStage::Finish()
 	{
-		onStageFinished.Notify();
-		m_bIsStageFinished = true;
+		LOG("Stage Finished!");
 	}
-
-
 }

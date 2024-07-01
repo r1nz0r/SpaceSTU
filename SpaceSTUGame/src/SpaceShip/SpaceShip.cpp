@@ -54,8 +54,13 @@ namespace SSTU
 	{
 		Explosion* expl = new Explosion();
 		expl->SpawnExplosion(GetWorld(), GetLocation());
+		OnBlow();
 		Destroy();
 		delete expl;
+	}
+
+	void Spaceship::OnBlow()
+	{
 	}
 
 	void Spaceship::Blink()

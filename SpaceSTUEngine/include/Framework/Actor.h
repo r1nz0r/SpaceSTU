@@ -1,6 +1,7 @@
 #pragma once
 #include "Framework/Object.h"
 #include "SFML/Graphics.hpp"
+#include "Framework/Delegate.h"
 
 class b2Body;
 
@@ -51,6 +52,8 @@ namespace SSTU
 
 		sf::Sprite& GetSprite() { return m_sprite; }
 		const sf::Sprite& GetSprite() const { return m_sprite; }
+
+		Delegate<Actor*> onActorDestroyed;
 
 	protected:
 		World* m_ownerWorld;

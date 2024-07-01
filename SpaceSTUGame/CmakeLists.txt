@@ -30,7 +30,44 @@ add_executable(${SPACE_STU_GAME_TARGET_NAME}
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/Vanguard.cpp
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Level/GameLevelOne.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Level/GameLevelOne.cpp)
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Level/GameLevelOne.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/VanguardStage.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/VanguardStage.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/TwinBlade.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/TwinBlade.cpp
+    
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/TwinBladeStage.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/TwinBladeStage.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/Hexagon.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/Hexagon.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/HexagonStage.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/HexagonStage.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/UFO.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/UFO.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/UFOStage.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/UFOStage.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Weapon/ThreeWayShooter.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Weapon/ThreeWayShooter.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Weapon/FrontalWiper.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Weapon/FrontalWiper.cpp
+    
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Player/Reward.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Player/Reward.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Player/Player.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Player/Player.cpp
+    
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Player/PlayerManager.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Player/PlayerManager.cpp
+)
 
 target_include_directories(${SPACE_STU_GAME_TARGET_NAME} PUBLIC 
     ${CMAKE_CURRENT_SOURCE_DIR}/include

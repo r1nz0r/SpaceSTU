@@ -10,10 +10,12 @@ namespace SSTU
 	public:
 		GameLevelOne(Application* owner);
 	private:
-		virtual void BeginPlay() override;
-		std::weak_ptr<PlayerSpaceship> playerTest;
-		void TimerCallBack_Test();
-
+		std::weak_ptr<PlayerSpaceship> m_playerSpaseship;
 		TimerHandler m_timerHandler;
+		
+		virtual void BeginPlay() override;
+		virtual void InitGameStages() override;
+		void PlayerSpaceshipDestroyed(Actor* obj);
+		void GameOver();
 	};
 }

@@ -7,6 +7,7 @@ namespace SSTU
 {		
 	class Actor;
 	class Application;	
+	class GameStage;
 	class World : public Object
 	{
 	public:
@@ -22,6 +23,7 @@ namespace SSTU
 		Application* GetApplication() const { return m_ownerApp; }
 		
 		void Clean();
+		void AddStage(const std::shared_ptr<GameStage>& newStage);
 
 	private:
 		virtual void Tick(float deltaTime);
@@ -32,6 +34,14 @@ namespace SSTU
 
 		List<std::shared_ptr<Actor>> m_actors; // Actual actors in world
 		List<std::shared_ptr<Actor>> m_pendingActors; // Actor to be spawned in next tick
+		List <std::shared_ptr<GameStage>> m_gameStages;
+
+		List<std::shared_ptr<GameStage>>::iterator m_currentStage;
+
+		virtual void InitGameStages();
+		virtual void OnAllGameStagesFinished();
+		void SetNextGameStage();
+		void StartStages();
 	};
 
 	template<typename ActorType, typename... Args>

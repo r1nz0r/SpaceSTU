@@ -171,6 +171,7 @@ namespace SSTU
 	void Actor::Destroy()
 	{
 		DisablePhysics();
+		onActorDestroyed.Notify(this);
 		Object::Destroy();
 	}
 

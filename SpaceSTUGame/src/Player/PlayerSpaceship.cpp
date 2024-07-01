@@ -5,6 +5,8 @@
 #include "Framework/World.h"
 #include "Framework/Application.h"
 #include "Weapon/BulletShooter.h"
+#include "Weapon/ThreeWayShooter.h"
+#include "Weapon/FrontalWiper.h"
 
 namespace SSTU
 {
@@ -12,7 +14,7 @@ namespace SSTU
 		: Spaceship(world, path)
 		, m_moveInput()
 		, m_speed(200.0f)
-		, m_shooter(new BulletShooter(this, sf::seconds(0.2f)))
+		, m_shooter(new BulletShooter(this, sf::seconds(0.1f), {50.f, 0.f}))
 	{
 		SetTeamId(1);
 	}
@@ -40,6 +42,17 @@ namespace SSTU
 	void PlayerSpaceship::BeginPlay()
 	{
 		Spaceship::BeginPlay();
+	}
+
+	void PlayerSpaceship::SetShooter(std::unique_ptr<Shooter>&& newShooter)
+	{
+		if (m_shooter && typeid(*m_shooter.get()) == typeid(*newShooter.get()))
+		{
+			m_shooter->IncrementLevel();
+			return;
+		}
+
+		m_shooter = std::move(newShooter);
 	}
 
 	void PlayerSpaceship::HandleInput()
