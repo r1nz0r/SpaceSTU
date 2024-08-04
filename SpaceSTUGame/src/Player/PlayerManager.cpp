@@ -3,7 +3,9 @@
 namespace SSTU
 {
 	std::unique_ptr<PlayerManager> PlayerManager::instance { nullptr };
+
 	PlayerManager::PlayerManager()
+		: m_players()
 	{}
 
 	Player& PlayerManager::CreateNewPlayer()

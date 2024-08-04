@@ -28,7 +28,7 @@ namespace SSTU
 	void Spaceship::BeginPlay()
 	{
 		Actor::BeginPlay();
-		SetEnablephysics(true);
+		SetEnablePhysics(true);
 		auto ptr = weak_from_this();
 		m_healthComponent.onHealthChanged.BindAction(ptr, &Spaceship::OnHealthChanged);
 		m_healthComponent.onTakenDamage.BindAction(ptr, &Spaceship::OnTakenDamage);

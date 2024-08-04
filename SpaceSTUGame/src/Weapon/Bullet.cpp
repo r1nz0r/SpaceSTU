@@ -42,7 +42,7 @@ namespace SSTU
 	void Bullet::BeginPlay()
 	{
 		Actor::BeginPlay();
-		SetEnablephysics(true);
+		SetEnablePhysics(true);
 	}
 
 	void Bullet::Move(float deltaTime)

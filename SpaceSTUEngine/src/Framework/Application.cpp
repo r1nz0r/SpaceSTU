@@ -34,6 +34,10 @@ namespace SSTU
 				{
 					m_window.close();
 				}
+				else
+				{
+					DispatchEvent(event);
+				}
 			}
 
 			// Fixed deltaTime to avoid non-physics behavior
@@ -80,6 +84,16 @@ namespace SSTU
 	void Application::Tick(float deltaTime)
 	{
 		//LOG("Ticking at framerate: %f", 1.f / deltaTime);
+	}
+
+	bool Application::DispatchEvent(const sf::Event& event)
+	{
+		if (m_currentWorld)
+		{
+			return m_currentWorld->DispatchEvent(event);
+		}
+
+		return false;
 	}
 
 	void Application::Render()

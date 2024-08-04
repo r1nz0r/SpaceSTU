@@ -32,5 +32,5 @@ namespace SSTU
 	void RewardHealth(PlayerSpaceship* player);
 	void RewardThreewayShooter(PlayerSpaceship* player);
 	void RewardFrontalWiper(PlayerSpaceship* player);
-	//void RewardLife(PlayerSpaceship* player);
+	void RewardLife(PlayerSpaceship* player);
 }

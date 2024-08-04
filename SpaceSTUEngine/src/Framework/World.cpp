@@ -1,6 +1,8 @@
 #include "Framework/World.h"
 #include "Framework/Actor.h"
 #include "Gameplay/GameStage.h"
+#include "Widgets/HUD.h"
+#include "Framework/Application.h"
 
 namespace SSTU
 {
@@ -29,6 +31,16 @@ namespace SSTU
 		m_gameStages.push_back(newStage);
 	}
 
+	bool World::DispatchEvent(const sf::Event& event)
+	{
+		if (m_HUD)
+		{
+			return m_HUD->HandleEvent(event);
+		}
+
+		return false;
+	}
+
 	void World::Tick(float deltaTime)
 	{
 		//LOG("Ticking at framerate: %f", 1.0f / deltaTime);
@@ -37,6 +49,14 @@ namespace SSTU
 	void World::BeginPlay()
 	{
 		//LOG("Begin play!");
+	}
+
+	void World::RenderHUD(sf::RenderWindow& window)
+	{
+		if (!m_HUD)
+			return;
+
+		m_HUD->Draw(window);
 	}
 
 	void World::InitGameStages()
@@ -87,6 +107,14 @@ namespace SSTU
 			m_currentStage->get()->Tick(deltaTime);
 
 		Tick(deltaTime);
+
+		if (m_HUD)
+		{
+			if (!m_HUD->HasInit())
+				m_HUD->NativeInit(m_ownerApp->GetWindow());
+
+			m_HUD->Tick(deltaTime);
+		}
 	}
 
 	void World::BeginPlayInternal()
@@ -97,7 +125,6 @@ namespace SSTU
 			InitGameStages();
 			StartStages();
 			BeginPlay();
-
 		}
 	}
 
@@ -107,6 +134,8 @@ namespace SSTU
 		{
 			actor->Render(window);
 		}
+
+		RenderHUD(window);
 	}
 }
 

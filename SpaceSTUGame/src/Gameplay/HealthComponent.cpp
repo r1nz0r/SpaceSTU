@@ -20,6 +20,8 @@ namespace SSTU
 		else if (m_health > m_maxHealth)
 			m_health = m_maxHealth;
 
+		onHealthChanged.Notify(amount, m_health, m_maxHealth);
+
 		if (amount < 0)
 		{
 			TakeDamage(-amount);
@@ -28,8 +30,6 @@ namespace SSTU
 				OnHealthEmpty();
 			}
 		}
-
-		onHealthChanged.Notify(amount, m_health, m_maxHealth);
 	}
 
 	void HealthComponent::TakeDamage(float amount)

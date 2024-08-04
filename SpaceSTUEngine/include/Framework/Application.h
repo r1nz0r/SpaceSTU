@@ -21,12 +21,15 @@ namespace SSTU
         std::weak_ptr<WorldType> LoadWorld();
 
         sf::Vector2u GetWindowSize() const;
+        sf::RenderWindow& GetWindow() { return m_window; }
+        const sf::RenderWindow& GetWindow() const { return m_window; }
 
     private:
         void TickInternal(float deltaTime);
         void RenderInternal();
         virtual void Render();
         virtual void Tick(float deltaTime);
+        bool DispatchEvent(const sf::Event& event);
 
         sf::RenderWindow m_window;
         float m_targetFrameRate;

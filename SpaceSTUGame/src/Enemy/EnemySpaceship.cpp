@@ -1,15 +1,20 @@
 #include "Enemy/EnemySpaceship.h"
 #include "Framework/MathUtility.h"
+#include "Player/PlayerManager.h"
+
 namespace SSTU
 {
 	EnemySpaceship::EnemySpaceship(
 		World* owner,
 		const std::string& texturePath,
 		float collisionDamage,
+		float rewardSpawnWeight,
 		const List<RewardFactoryFunc> rewards
 	)	: Spaceship(owner, texturePath)
-		, m_collisionDamage {collisionDamage}
-		, m_rewardFactories {rewards}
+		, m_collisionDamage (collisionDamage)
+		, m_rewardFactories (rewards)
+		, m_scoreReward (10)
+		, m_rewardSpawnWeight (rewardSpawnWeight)
 	{
 		SetTeamId(2);
 	}
@@ -22,9 +27,15 @@ namespace SSTU
 			Destroy();
 	}
 
+	void EnemySpaceship::SetScoreReward(int amount)
+	{}
+
 	void EnemySpaceship::SpawnReward()
 	{
 		int pick = static_cast<int>(Math::RandomRange(0, m_rewardFactories.size()));
+
+		if (m_rewardSpawnWeight < Math::RandomRange(0, 1))
+			return;
 
 		if (pick >= 0 && pick < m_rewardFactories.size())
 		{
@@ -46,5 +57,9 @@ namespace SSTU
 	void EnemySpaceship::OnBlow()
 	{
 		SpawnReward();
+		auto player = PlayerManager::Instance().GetPlayer();
+
+		if (player)
+			player->AddScore(m_scoreReward);
 	}
 }

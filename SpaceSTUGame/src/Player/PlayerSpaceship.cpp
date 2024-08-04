@@ -14,7 +14,7 @@ namespace SSTU
 		: Spaceship(world, path)
 		, m_moveInput()
 		, m_speed(200.0f)
-		, m_shooter(new BulletShooter(this, sf::seconds(0.1f), {50.f, 0.f}))
+		, m_shooter(new BulletShooter(this, sf::seconds(0.25f), {50.f, 0.f}))
 	{
 		SetTeamId(1);
 	}

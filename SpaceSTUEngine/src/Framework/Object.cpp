@@ -3,8 +3,11 @@
 
 namespace SSTU
 {
+	uint64_t Object::s_uniqueIdCounter = 0;
+
 	Object::Object()
 		: m_bIsPendingDestroy(false)
+		, m_Id(GetNextAvailableId())
 	{
 
 	}
@@ -28,5 +31,10 @@ namespace SSTU
 	std::weak_ptr<const Object> Object::GetWeakPtr() const
 	{
 		return weak_from_this();
+	}
+
+	uint64_t Object::GetNextAvailableId()
+	{
+		return ++s_uniqueIdCounter;
 	}
 }

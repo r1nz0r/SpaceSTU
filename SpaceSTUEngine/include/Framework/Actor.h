@@ -38,7 +38,7 @@ namespace SSTU
 		void CenterPivot();
 		bool IsOutOfWindow(float allowance = 10.0f) const;
 
-		void SetEnablephysics(bool bState);
+		void SetEnablePhysics(bool bState);
 		void UpdatePhysicsBodyTransform();
 		virtual void OnBeginOverlap(Actor* other);
 		virtual void OnEndOverlap(Actor* other);

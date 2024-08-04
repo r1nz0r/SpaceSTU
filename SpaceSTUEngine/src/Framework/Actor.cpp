@@ -140,7 +140,7 @@ namespace SSTU
 		return false;
 	}
 
-	void Actor::SetEnablephysics(bool bState)
+	void Actor::SetEnablePhysics(bool bState)
 	{
 		m_bPhysicsEnabled = bState;
 		m_bPhysicsEnabled ? EnablePhysics() : DisablePhysics();

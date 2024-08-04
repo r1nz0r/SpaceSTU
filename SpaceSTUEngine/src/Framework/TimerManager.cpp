@@ -78,7 +78,9 @@ namespace SSTU
 
 	uint32_t TimerHandler::timerKeyCounter { 0 };
 
-	TimerHandler::TimerHandler() : m_timerKey(GetNextTimerKey()) {}
+	TimerHandler::TimerHandler()
+		: m_timerKey(GetNextTimerKey())
+	{}
 
 	bool operator==(const TimerHandler& lhs, const TimerHandler& rhs)
 	{

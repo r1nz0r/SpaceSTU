@@ -3,7 +3,7 @@
 #include "player/PlayerSpaceship.h"
 #include "weapon/ThreeWayShooter.h"
 #include "weapon/FrontalWiper.h"
-//#include "Player/PlayerManager.h"
+#include "Player/PlayerManager.h"
 
 namespace SSTU
 {
@@ -15,7 +15,7 @@ namespace SSTU
 	void Reward::BeginPlay()
 	{
 		Actor::BeginPlay();
-		SetEnablephysics(true);
+		SetEnablePhysics(true);
 	}
 	void Reward::Tick(float deltaTime)
 	{
@@ -26,24 +26,18 @@ namespace SSTU
 	void Reward::OnBeginOverlap(Actor* otherActor)
 	{
 		if (!otherActor || otherActor->IsPendingDestroy())
+			return;	
+
+		if (!PlayerManager::Instance().GetPlayer())
 			return;
 
-		//if (!PlayerManager::Get().GetPlayer())
-		//	return;
+		auto playerSpaceship = PlayerManager::Instance().GetPlayer()->GetSpaceship();
+		if (playerSpaceship.expired())
+			return;
 
-		//weak<PlayerSpaceship> playerSpaceship = PlayerManager::Get().GetPlayer()->GetCurrentSpaceship();
-		//if (playerSpaceship.expired() || playerSpaceship.lock()->IsPendingDestory())
-		//	return;
-
-		//if (playerSpaceship.lock()->GetUniqueID() == otherActor->GetUniqueID())
-		//{
-		//	
-		//}
-
-		PlayerSpaceship* playerSpaceship = dynamic_cast<PlayerSpaceship*>(otherActor);
-		if (playerSpaceship != nullptr && !playerSpaceship->IsPendingDestroy())
+		if (playerSpaceship.lock()->GetUniqueId() == otherActor->GetUniqueId())
 		{
-			mRewardFunc(playerSpaceship);
+			mRewardFunc(playerSpaceship.lock().get());
 			Destroy();
 		}
 	}
@@ -63,10 +57,10 @@ namespace SSTU
 		return CreateReward(world, "SpaceShooterRedux/PNG/pickups/front_row_shooter_pickup.png", RewardFrontalWiper);
 	}
 
-	//std::weak_ptr<Reward>CreateLifeReward(World* world)
-	//{
-	//	return CreateReward(world, "SpaceShooterRedux/PNG/pickups/playerLife1_blue.png", RewardLife);
-	//}
+	std::weak_ptr<Reward>CreateLifeReward(World* world)
+	{
+		return CreateReward(world, "SpaceShooterRedux/PNG/pickups/playerLife1_blue.png", RewardLife);
+	}
 
 	std::weak_ptr<Reward> CreateReward(World* world, const std::string& texturePath, RewardFunc rewardFunc)
 	{
@@ -100,11 +94,11 @@ namespace SSTU
 		}
 	}
 
-	//void RewardLife(PlayerSpaceship* player)
-	//{
-	//	if (!PlayerManager::Get().GetPlayer())
-	//		return;
+	void RewardLife(PlayerSpaceship* player)
+	{
+		if (!PlayerManager::Instance().GetPlayer())
+			return;
 
-	//	PlayerManager::Get().GetPlayer()->AddLifeCount(1);
-	//}
+		PlayerManager::Instance().GetPlayer()->AddLifes(1);
+	}
 }

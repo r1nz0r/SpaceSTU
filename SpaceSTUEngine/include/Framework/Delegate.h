@@ -32,8 +32,8 @@ namespace SSTU
 		{
 			for (auto iter = m_callbacks.begin(); iter != m_callbacks.end();)
 			{
-				if ((*iter)(args...))
-					++iter;
+				if ((*iter)(args...))				
+					++iter;				
 				else
 					iter = m_callbacks.erase(iter);
 			}
@@ -41,5 +41,5 @@ namespace SSTU
 
 	private:
 		List<Callback> m_callbacks;
-	};
+	};	
 }

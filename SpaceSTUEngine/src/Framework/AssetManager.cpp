@@ -10,32 +10,18 @@ namespace SSTU
 
 	std::shared_ptr<sf::Texture> AssetManager::LoadTexture(const std::string& path)
 	{
-		auto found = m_loadedTextures.find(path);
-		if (found != m_loadedTextures.end())
-			return found->second;
+		return LoadAsset(path, m_loadedTextures);
+	}
 
-		auto newTexture = std::make_shared<sf::Texture>();		
-		if (newTexture->loadFromFile(m_rootDirectory + path))
-		{
-			m_loadedTextures[path] = newTexture;
-			return newTexture;
-		}
-
-		return nullptr;
+	std::shared_ptr<sf::Font> AssetManager::LoadFont(const std::string& path)
+	{		
+		return LoadAsset(path, m_loadedFonts);
 	}
 
 	void AssetManager::Clean()
 	{		
-		for (auto iter = m_loadedTextures.begin(); iter != m_loadedTextures.end();)
-		{
-			if (iter->second.unique())
-			{
-				LOG("Cleaning texture: %s", iter->first.c_str());
-				iter = m_loadedTextures.erase(iter);			
-			}
-			else			
-				++iter;			
-		}
+		CleanUniqueRef(m_loadedFonts);
+		CleanUniqueRef(m_loadedTextures);
 	}
 
 	void AssetManager::SetAssetRootDirectory(const std::string& directory)

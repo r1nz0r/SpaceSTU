@@ -18,7 +18,6 @@ namespace SSTU
 	private:
 		void TakeDamage(float amount);
 		void OnHealthEmpty();
-		void HealthRegen(float amount);
 		float m_health;
 		float m_maxHealth;
 	};
