@@ -1,5 +1,6 @@
 #include "GameFramework/GameApplication.h"
 #include "Level/GameLevelOne.h"
+#include "Level/MainMenu.h"
 #include "Framework/AssetManager.h"
 #include "config.h"
 
@@ -15,6 +16,6 @@ namespace SSTU
 		: Application { 600, 980, "Space STU", sf::Style::Titlebar | sf::Style::Close}		
 	{
 		AssetManager::Instance().SetAssetRootDirectory(GetResourceDir());
-		auto world = LoadWorld<GameLevelOne>();		
+		auto world = LoadWorld<MainMenu>();		
 	}
 }

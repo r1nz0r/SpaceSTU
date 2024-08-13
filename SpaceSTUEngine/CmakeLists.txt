@@ -56,6 +56,9 @@ add_library(${SPACE_STU_ENGINE_TARGET_NAME} STATIC
 
     ${CMAKE_CURRENT_SOURCE_DIR}/include/Widgets/ImageWidget.h
     ${CMAKE_CURRENT_SOURCE_DIR}/src/Widgets/ImageWidget.cpp
+
+    ${CMAKE_CURRENT_SOURCE_DIR}/include/Widgets/Button.h
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/Widgets/Button.cpp
 )
 
 target_include_directories(${SPACE_STU_ENGINE_TARGET_NAME} PUBLIC 

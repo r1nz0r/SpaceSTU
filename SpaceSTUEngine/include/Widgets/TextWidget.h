@@ -19,9 +19,9 @@ namespace SSTU
 		virtual sf::FloatRect GetBound() const override;
 
 	private:
-		virtual void Draw(sf::RenderWindow& window);
-		virtual void OnLocationUpdated(const sf::Vector2f& newLocation);
-		virtual void OnRotationUpdated(float newRotation);
+		virtual void Draw(sf::RenderWindow& window) override;
+		virtual void OnLocationUpdated(const sf::Vector2f& newLocation) override;
+		virtual void OnRotationUpdated(float newRotation) override;
 
 		std::shared_ptr<sf::Font> m_font;
 		sf::Text m_text;

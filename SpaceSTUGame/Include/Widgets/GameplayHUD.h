@@ -13,6 +13,7 @@ namespace SSTU
 		GameplayHUD();
 		virtual void Draw(sf::RenderWindow& window) override;
 		virtual void Tick(float deltaTime) override;
+		virtual bool HandleEvent(const sf::Event& event) override;
 
 	protected:
 		virtual void Init(const sf::RenderWindow& window) override;

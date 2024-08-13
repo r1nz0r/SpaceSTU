@@ -23,6 +23,7 @@ namespace SSTU
         sf::Vector2u GetWindowSize() const;
         sf::RenderWindow& GetWindow() { return m_window; }
         const sf::RenderWindow& GetWindow() const { return m_window; }
+        void Quit();
 
     private:
         void TickInternal(float deltaTime);
@@ -39,6 +40,8 @@ namespace SSTU
         sf::Time m_cleanCycleInterval;
 
         std::shared_ptr<World> m_currentWorld;
+        std::shared_ptr<World> m_pendingWorld;
+
     };
 
     template<typename WorldType>
@@ -47,8 +50,7 @@ namespace SSTU
         static_assert(std::is_base_of<World, WorldType>::value, "WorldType must derive from World");
 
         auto newWorld = std::make_shared<WorldType>(this);
-        m_currentWorld = newWorld;
-        m_currentWorld->BeginPlayInternal();
+        m_pendingWorld = newWorld;
         return newWorld;
     }
 }

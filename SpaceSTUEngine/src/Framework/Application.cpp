@@ -32,7 +32,7 @@ namespace SSTU
 			{
 				if (event.type == sf::Event::Closed())
 				{
-					m_window.close();
+					Quit();
 				}
 				else
 				{
@@ -58,6 +58,11 @@ namespace SSTU
 		return m_window.getSize();
 	}
 
+	void Application::Quit()
+	{
+		m_window.close();
+	}
+
 	void Application::TickInternal(float deltaTime)
 	{
 		Tick(deltaTime);
@@ -79,12 +84,15 @@ namespace SSTU
 			if (m_currentWorld)
 				m_currentWorld->Clean();
 		}
+
+		if (m_pendingWorld && m_pendingWorld != m_currentWorld)
+		{
+			m_currentWorld = m_pendingWorld;
+			m_currentWorld->BeginPlayInternal();
+		}
 	}
 
-	void Application::Tick(float deltaTime)
-	{
-		//LOG("Ticking at framerate: %f", 1.f / deltaTime);
-	}
+	void Application::Tick(float deltaTime) {}
 
 	bool Application::DispatchEvent(const sf::Event& event)
 	{

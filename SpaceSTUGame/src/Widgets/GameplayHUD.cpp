@@ -2,6 +2,7 @@
 #include "Player/PlayerManager.h"
 #include "Player/PlayerSpaceship.h"
 #include "Framework/Actor.h"
+
 namespace SSTU
 {
 	GameplayHUD::GameplayHUD()
@@ -32,6 +33,11 @@ namespace SSTU
 		int frameRate = 1 / deltaTime;
 		std::string frameRateStr = "Frame Rate: " + std::to_string(frameRate);
 		m_frameRateText.SetString(frameRateStr);
+	}
+
+	bool GameplayHUD::HandleEvent(const sf::Event& event)
+	{		
+		return HUD::HandleEvent(event);
 	}
 
 	void GameplayHUD::Init(const sf::RenderWindow& window)

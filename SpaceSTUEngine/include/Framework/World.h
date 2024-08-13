@@ -29,7 +29,7 @@ namespace SSTU
 		
 		void Clean();
 		void AddStage(const std::shared_ptr<GameStage>& newStage);
-		bool DispatchEvent(const sf::Event& event);
+		bool DispatchEvent(const sf::Event& event);		
 
 	private:
 		virtual void Tick(float deltaTime);

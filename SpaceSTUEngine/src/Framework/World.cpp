@@ -85,6 +85,10 @@ namespace SSTU
 	void World::StartStages()
 	{
 		m_currentStage = m_gameStages.begin();
+
+		if (m_currentStage == m_gameStages.end())
+			return;
+
 		m_currentStage->get()->onStageFinished.BindAction(GetWeakPtr(), &World::SetNextGameStage);
 		m_currentStage->get()->Start();
 	}
