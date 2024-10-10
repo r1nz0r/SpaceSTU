@@ -25,7 +25,7 @@ namespace SSTU
 
 		TimerHandler m_spawnTimerHandler;
 
-		int m_spawnAmount;
+		int m_amountToSpawn;
 		int m_spawnedCounter;
 	};
 }

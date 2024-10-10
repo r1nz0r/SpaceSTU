@@ -13,8 +13,13 @@ namespace SSTU
 	PlayerSpaceship::PlayerSpaceship(World* world, const std::string& path)
 		: Spaceship(world, path)
 		, m_moveInput()
-		, m_speed(200.0f)
+		, m_speed(270.0f)
 		, m_shooter(new BulletShooter(this, sf::seconds(0.25f), {50.f, 0.f}))
+		, m_invulnerableTime(2.0f)
+		, m_bIsInvulnerable(true)
+		, m_invulnerableBlinkInterval(0.5f)
+		, m_invulnerableBlinkTimer(0.f)
+		, m_invulnerableBlinkDirection(1.0f)
 	{
 		SetTeamId(1);
 	}
@@ -24,6 +29,7 @@ namespace SSTU
 		HandleInput();
 		ConsumeInput(deltaTime);
 		ClampPosition();
+		UpdateInvulnerableVisuals(deltaTime);
 	}
 
 	void PlayerSpaceship::SetSpeed(float speed)
@@ -42,6 +48,7 @@ namespace SSTU
 	void PlayerSpaceship::BeginPlay()
 	{
 		Spaceship::BeginPlay();
+		TimerManager::Instance().SetTimer(GetWeakPtr(), &PlayerSpaceship::StopInvulnerable, m_invulnerableTime);
 	}
 
 	void PlayerSpaceship::SetShooter(std::unique_ptr<Shooter>&& newShooter)
@@ -53,6 +60,12 @@ namespace SSTU
 		}
 
 		m_shooter = std::move(newShooter);
+	}
+
+	void PlayerSpaceship::ApplyDamage(float amount)
+	{
+		if (!m_bIsInvulnerable)
+			Spaceship::ApplyDamage(amount);
 	}
 
 	void PlayerSpaceship::HandleInput()
@@ -102,5 +115,26 @@ namespace SSTU
 			location.y = windowSize.y - size.height / 2;
 		
 		SetLocation(location);
+	}
+
+	void PlayerSpaceship::StopInvulnerable()
+	{
+		GetSprite().setColor({ 255, 255, 255, 255 });
+		m_bIsInvulnerable = false;
+	}
+
+	void PlayerSpaceship::UpdateInvulnerableVisuals(float deltaTime)
+	{
+		if (!m_bIsInvulnerable)
+			return;
+
+		m_invulnerableBlinkTimer += deltaTime * m_invulnerableBlinkDirection;
+		
+		if (m_invulnerableBlinkTimer < 0 || m_invulnerableBlinkTimer > m_invulnerableBlinkInterval)
+		{
+			m_invulnerableBlinkDirection *= -1;
+		}
+
+		GetSprite().setColor(Math::LerpColor({ 255, 255, 255, 64 }, { 255, 255, 255, 128 }, m_invulnerableBlinkTimer / m_invulnerableBlinkInterval));
 	}
 }

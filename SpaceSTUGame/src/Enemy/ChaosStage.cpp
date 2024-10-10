@@ -13,12 +13,12 @@
 namespace SSTU
 {
 	ChaosStage::ChaosStage(World* world)
-		: GameStage { world },
-		m_spawnInterval { 4.f },
-		m_minSpawnInterval { 0.8f },
-		m_spawnIntervalDecrement { 0.5f },
-		m_spawnIntervalDecrmentInterval { 5.f },
-		m_stageDuration { 60.f }
+		: GameStage(world)
+		, m_spawnInterval(4.f)
+		, m_minSpawnInterval(0.8f)
+		, m_spawnIntervalDecrement(0.5f)
+		, m_spawnIntervalDecrmentInterval(5.f)
+		, m_stageDuration(60.f)
 	{}
 
 	void ChaosStage::Start()

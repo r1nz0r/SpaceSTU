@@ -1,65 +1,10 @@
-add_library(${SPACE_STU_ENGINE_TARGET_NAME} STATIC
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/Application.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/Application.cpp
+# Add source and header files of engine here
+FILE(GLOB_RECURSE headers "include/*.h")
+FILE(GLOB_RECURSE sources "src/*.cpp")
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/EntryPoint.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/EntryPoint.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/Core.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/Core.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/World.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/World.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/Actor.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/Actor.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/Object.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/Object.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/AssetManager.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/AssetManager.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/MathUtility.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/MathUtility.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/PhysicsSystem.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/PhysicsSystem.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/Delegate.h
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/NonCopyable.h
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Framework/TimerManager.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Framework/TimerManager.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/VFX/Particle.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/VFX/Particle.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Gameplay/GameStage.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Gameplay/GameStage.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Gameplay/WaitStage.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Gameplay/WaitStage.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Widgets/HUD.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Widgets/HUD.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Widgets/Widget.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Widgets/Widget.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Widgets/TextWidget.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Widgets/TextWidget.cpp
-    
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Widgets/ProgressBar.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Widgets/ProgressBar.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Widgets/ImageWidget.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Widgets/ImageWidget.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Widgets/Button.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Widgets/Button.cpp
-)
+# Create static library for Engine
+add_library(${SPACE_STU_ENGINE_TARGET_NAME} STATIC ${sources} ${headers})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}  FILES ${sources} ${headers})
 
 target_include_directories(${SPACE_STU_ENGINE_TARGET_NAME} PUBLIC 
     ${CMAKE_CURRENT_SOURCE_DIR}/include

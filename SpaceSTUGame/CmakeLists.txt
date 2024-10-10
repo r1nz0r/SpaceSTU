@@ -1,85 +1,11 @@
-add_executable(${SPACE_STU_GAME_TARGET_NAME}
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/GameFramework/GameApplication.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/GameFramework/GameApplication.cpp
+# Add source and header files of engine here
+FILE(GLOB_RECURSE headers "include/*.h")
+FILE(GLOB_RECURSE sources "src/*.cpp")
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/SpaceShip/SpaceShip.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/SpaceShip/SpaceShip.cpp
+# Create static library for Engine
+add_executable(${SPACE_STU_GAME_TARGET_NAME} ${sources} ${headers})
+source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}  FILES ${sources} ${headers})
 
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Player/PlayerSpaceShip.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Player/PlayerSpaceShip.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Weapon/Shooter.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Weapon/Shooter.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Weapon/BulletShooter.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Weapon/BulletShooter.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Weapon/Bullet.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Weapon/Bullet.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Gameplay/HealthComponent.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Gameplay/HealthComponent.cpp
-    
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/VFX/Explosion.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/VFX/Explosion.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/EnemySpaceship.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/EnemySpaceship.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/Vanguard.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/Vanguard.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Level/GameLevelOne.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Level/GameLevelOne.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/VanguardStage.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/VanguardStage.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/TwinBlade.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/TwinBlade.cpp
-    
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/TwinBladeStage.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/TwinBladeStage.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/Hexagon.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/Hexagon.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/HexagonStage.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/HexagonStage.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/UFO.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/UFO.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/UFOStage.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/UFOStage.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Weapon/ThreeWayShooter.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Weapon/ThreeWayShooter.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Weapon/FrontalWiper.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Weapon/FrontalWiper.cpp
-    
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Player/Reward.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Player/Reward.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Player/Player.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Player/Player.cpp
-    
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Player/PlayerManager.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Player/PlayerManager.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Widgets/GameplayHUD.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Widgets/GameplayHUD.cpp
-    
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Widgets/MainMenuHUD.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Widgets/MainMenuHUD.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Level/MainMenu.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Level/MainMenu.cpp
-
-    ${CMAKE_CURRENT_SOURCE_DIR}/include/Enemy/ChaosStage.h
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/Enemy/ChaosStage.cpp
-)
 
 target_include_directories(${SPACE_STU_GAME_TARGET_NAME} PUBLIC 
     ${CMAKE_CURRENT_SOURCE_DIR}/include
