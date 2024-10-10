@@ -9,22 +9,22 @@ namespace SSTU
 {
 	UFOStage::UFOStage(World* world)
 		: GameStage { world },
-		mSpawnInterval { 4.f },
-		mSpawnAmt { 10 },
-		mCurrentSpawnAmt { 0 },
-		mUFOSpeed { 200.f }
+		m_spawnInterval { 4.f },
+		m_amountToSpawn { 10 },
+		m_currentSpawned { 0 },
+		m_UfoSpeed { 200.f }
 	{
 
 	}
 
 	void UFOStage::Start()
 	{
-		mSpawnTimer = TimerManager::Instance().SetTimer(GetWeakPtr(), &UFOStage::SpawnUFO, mSpawnInterval, true);
+		m_spawnTimer = TimerManager::Instance().SetTimer(GetWeakPtr(), &UFOStage::SpawnUFO, m_spawnInterval, true);
 	}
 
 	void UFOStage::Finish()
 	{
-		TimerManager::Instance().ClearTimer(mSpawnTimer);
+		TimerManager::Instance().ClearTimer(m_spawnTimer);
 	}
 
 	sf::Vector2f UFOStage::GetRandomSpawnLoc() const
@@ -54,12 +54,12 @@ namespace SSTU
 		sf::Vector2f spawnLocToCenter { center.x - spawnLoc.x, center.y - spawnLoc.y };
 		Math::NormalizeVector(spawnLocToCenter);
 
-		sf::Vector2f spawnVelocity = spawnLocToCenter * mUFOSpeed;
+		sf::Vector2f spawnVelocity = spawnLocToCenter * m_UfoSpeed;
 
 		std::weak_ptr<UFO> newUFO = GetWorld()->SpawnActor<UFO>(spawnVelocity);
 		newUFO.lock()->SetLocation(spawnLoc);
 
-		if (++mCurrentSpawnAmt == mSpawnAmt)
+		if (++m_currentSpawned == m_amountToSpawn)
 		{
 			FinishInternal();
 		}

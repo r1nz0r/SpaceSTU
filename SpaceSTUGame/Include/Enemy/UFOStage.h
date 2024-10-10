@@ -15,11 +15,11 @@ namespace SSTU
 		sf::Vector2f GetRandomSpawnLoc() const;
 		void SpawnUFO();
 
-		float mSpawnInterval;
-		int mSpawnAmt;
-		int mCurrentSpawnAmt;
-		float mUFOSpeed;
+		float m_spawnInterval;
+		int m_amountToSpawn;
+		int m_currentSpawned;
+		float m_UfoSpeed;
 
-		TimerHandler mSpawnTimer;
+		TimerHandler m_spawnTimer;
 	};
 }

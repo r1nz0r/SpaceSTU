@@ -19,15 +19,18 @@ namespace SSTU
 
 	bool MainMenuHUD::HandleEvent(const sf::Event& event)
 	{
-		return	m_startButton.HandleEvent(event) ||
-				m_quitButton.HandleEvent(event)	 ||
-				HUD::HandleEvent(event);
+		bool handled = false;
+
+		// Check every single button for its event
+		handled = m_quitButton.HandleEvent(event) || handled;
+		handled = m_startButton.HandleEvent(event) || handled;
+
+		// Return handled for any button was handle event or not
+		return handled || HUD::HandleEvent(event);
 	}
 
 	void MainMenuHUD::Tick(float deltaTime)
-	{
-
-	}
+	{}
 
 	void MainMenuHUD::Init(const sf::RenderWindow& window)
 	{

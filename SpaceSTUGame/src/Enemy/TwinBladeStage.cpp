@@ -11,7 +11,7 @@ namespace SSTU
 		, m_spawnDistanceToCenter{100.f}
 		, m_leftSpawnLocation{}
 		, m_rightSpawnLocation{}
-		, m_spawnAmount{4}
+		, m_amountToSpawn{4}
 		, m_spawnedCounter{0}
 	{
 		auto windowSize = owner->GetApplication()->GetWindowSize();
@@ -32,7 +32,7 @@ namespace SSTU
 		m_currentSpawnLocation = m_currentSpawnLocation == m_leftSpawnLocation ? m_rightSpawnLocation : m_leftSpawnLocation;
 		++m_spawnedCounter;
 
-		if (m_spawnedCounter == m_spawnAmount)
+		if (m_spawnedCounter == m_amountToSpawn)
 			FinishInternal();
 	}
 
