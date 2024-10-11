@@ -1,9 +1,20 @@
+
+
 # Add source and header files of engine here
 FILE(GLOB_RECURSE headers "include/*.h")
 FILE(GLOB_RECURSE sources "src/*.cpp")
 
 # Create static library for Engine
 add_executable(${SPACE_STU_GAME_TARGET_NAME} ${sources} ${headers})
+
+if(MSVC)
+    # Visual Studio
+    set_target_properties(${SPACE_STU_GAME_TARGET_NAME} PROPERTIES LINK_FLAGS "/SUBSYSTEM:WINDOWS")
+elseif(MINGW)
+    # MinGW
+    set_target_properties(${SPACE_STU_GAME_TARGET_NAME} PROPERTIES LINK_FLAGS "-mwindows" )
+endif()
+
 source_group(TREE ${CMAKE_CURRENT_SOURCE_DIR}  FILES ${sources} ${headers})
 
 
