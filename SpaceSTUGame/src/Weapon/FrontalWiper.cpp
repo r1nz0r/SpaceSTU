@@ -31,16 +31,16 @@ namespace SSTU
 		m_shooter6.IncrementLevel(amt);
 	}
 
-	//void FrontalWiper::SetCurrentLevel(int newLevel)
-	//{
-	//	Shooter::SetCurrentLevel(newLevel);
-	//	mShooter1.SetCurrentLevel(newLevel);
-	//	mShooter2.SetCurrentLevel(newLevel);
-	//	mShooter3.SetCurrentLevel(newLevel);
-	//	mShooter4.SetCurrentLevel(newLevel);
-	//	mShooter5.SetCurrentLevel(newLevel);
-	//	mShooter6.SetCurrentLevel(newLevel);
-	//}
+	void FrontalWiper::SetCurrentLevel(int newLevel)
+	{
+		Shooter::SetCurrentLevel(newLevel);
+		m_shooter1.SetCurrentLevel(newLevel);
+		m_shooter2.SetCurrentLevel(newLevel);
+		m_shooter3.SetCurrentLevel(newLevel);
+		m_shooter4.SetCurrentLevel(newLevel);
+		m_shooter5.SetCurrentLevel(newLevel);
+		m_shooter6.SetCurrentLevel(newLevel);
+	}
 
 	void FrontalWiper::ShootImpl()
 	{

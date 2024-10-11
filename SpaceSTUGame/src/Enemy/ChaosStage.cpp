@@ -30,6 +30,7 @@ namespace SSTU
 
 	void ChaosStage::Finish()
 	{
+		GameStage::Finish();
 		TimerManager::Instance().ClearTimer(mDifficultTimerHandle);
 		TimerManager::Instance().ClearTimer(m_spawnTimer);
 	}
@@ -81,7 +82,7 @@ namespace SSTU
 
 	void ChaosStage::OnStageDurationReached()
 	{
-		Finish();
+		FinishInternal();
 	}
 
 	sf::Vector2f ChaosStage::GetRandomSpawnLocationTop() const

@@ -23,4 +23,9 @@ namespace SSTU
 
 		++m_currentLevel;
 	}
+
+	void Shooter::SetCurrentLevel(int level)
+	{
+		m_currentLevel = level;
+	}
 }

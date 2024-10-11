@@ -23,6 +23,7 @@ namespace SSTU
 		);
 		virtual void Tick(float deltaTime);
 		void SetScoreReward(int amount);
+		void SetRewardSpawnWeight(float weight);
 
 	private:
 		void SpawnReward();

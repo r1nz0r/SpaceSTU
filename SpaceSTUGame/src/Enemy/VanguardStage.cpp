@@ -16,7 +16,7 @@ namespace SSTU
 		, m_spawnLocation { 0.f, 0.f }
 		, m_rowsToSpawn { 2 }
 		, m_spawnedRowsCount { 0 }
-		, m_vanguardsPerRow { 1 }
+		, m_vanguardsPerRow { 5 }
 		, m_spawnedVanguardsCount { 0 }
 	{}
 

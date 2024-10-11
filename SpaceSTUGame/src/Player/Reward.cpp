@@ -10,7 +10,7 @@ namespace SSTU
 	Reward::Reward(World* world, const std::string& texturePath, RewardFunc rewardFunc, float speed)
 		: Actor { world, texturePath },
 		mRewardFunc { rewardFunc },
-		mSpeed { speed }
+		m_speed { speed }
 	{}
 	void Reward::BeginPlay()
 	{
@@ -20,7 +20,7 @@ namespace SSTU
 	void Reward::Tick(float deltaTime)
 	{
 		Actor::Tick(deltaTime);
-		AddLocationOffset({ 0.f, mSpeed * deltaTime });
+		AddLocationOffset({ 0.f, m_speed * deltaTime });
 	}
 
 	void Reward::OnBeginOverlap(Actor* otherActor)

@@ -21,7 +21,7 @@ namespace SSTU
 		BulletShooter m_topLevelShooterRight;
 
 		virtual void IncrementLevel(int amt) override;
-		//virtual void SetCurrentLevel(int level) override;
+		virtual void SetCurrentLevel(int level) override;
 	private:
 		virtual void ShootImpl();
 	};

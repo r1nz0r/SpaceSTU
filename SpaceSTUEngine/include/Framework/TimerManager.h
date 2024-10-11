@@ -47,7 +47,6 @@ namespace SSTU
 		float m_timeCounter;
 		bool m_bIsLooping;
 		bool m_bIsExpired;
-
 	};
 
 	class TimerManager : public NonCopyable
@@ -65,13 +64,11 @@ namespace SSTU
 		);
 		
 		void ClearTimer(TimerHandler handler);
-
 	protected:
 		TimerManager();
 	private:
 		static std::unique_ptr<TimerManager> instance;
-		Dictionary<TimerHandler, Timer, TimerHandlerHashFunction> m_timers;
-		
+		Dictionary<TimerHandler, Timer, TimerHandlerHashFunction> m_timers;		
 	};
 
 

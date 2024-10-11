@@ -3,6 +3,7 @@
 #include "Widgets/TextWidget.h"
 #include "Widgets/ProgressBar.h"
 #include "Widgets/ImageWidget.h"
+#include "Widgets/Button.h"
 
 namespace SSTU
 {
@@ -14,6 +15,9 @@ namespace SSTU
 		virtual void Draw(sf::RenderWindow& window) override;
 		virtual void Tick(float deltaTime) override;
 		virtual bool HandleEvent(const sf::Event& event) override;
+		void OnGameFinished(bool bHasPlayerWin);
+		Delegate<>& GetRestartButtonDelegate() { return m_restartButton.onClicked; }
+		Delegate<>& GetQuitButtonDelegate() { return m_quitButton.onClicked; }
 
 	protected:
 		virtual void Init(const sf::RenderWindow& window) override;
@@ -38,5 +42,12 @@ namespace SSTU
 		float m_criticalThreshold;
 
 		float m_widgetSpacing;
+
+		TextWidget m_winLoseText;
+		TextWidget m_finalScoreText;
+		Button m_restartButton;
+		Button m_quitButton;
+
+		sf::Vector2u m_windowSize;
 	};
 }

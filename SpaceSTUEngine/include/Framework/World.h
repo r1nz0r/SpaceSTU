@@ -41,7 +41,7 @@ namespace SSTU
 
 		List<std::shared_ptr<Actor>> m_actors; // Actual actors in world
 		List<std::shared_ptr<Actor>> m_pendingActors; // Actor to be spawned in next tick
-		List <std::shared_ptr<GameStage>> m_gameStages;
+		List<std::shared_ptr<GameStage>> m_gameStages;
 		List<std::shared_ptr<GameStage>>::iterator m_currentStage;
 		std::shared_ptr<HUD> m_HUD; // Actual actors in world
 

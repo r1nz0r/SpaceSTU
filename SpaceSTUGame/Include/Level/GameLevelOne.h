@@ -10,14 +10,17 @@ namespace SSTU
 	{
 	public:
 		GameLevelOne(Application* owner);
-	private:
-		std::weak_ptr<PlayerSpaceship> m_playerSpaseship;
-		std::weak_ptr<GameplayHUD> m_gameplayHUD;
-		TimerHandler m_timerHandler;
-		
+	private:		
 		virtual void BeginPlay() override;
 		virtual void InitGameStages() override;
 		void PlayerSpaceshipDestroyed(Actor* obj);
 		void GameOver();
+		virtual void OnAllGameStagesFinished() override;
+		void Restart();
+		void Quit();
+
+		std::weak_ptr<PlayerSpaceship> m_playerSpaseship;
+		std::weak_ptr<GameplayHUD> m_gameplayHUD;
+		TimerHandler m_timerHandler;
 	};
 }

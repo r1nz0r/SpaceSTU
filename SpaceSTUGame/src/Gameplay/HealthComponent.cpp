@@ -32,6 +32,12 @@ namespace SSTU
 		}
 	}
 
+	void HealthComponent::SetInitialHealth(float health, float maxHealth)
+	{
+		m_health = health;
+		m_maxHealth = maxHealth;
+	}
+
 	void HealthComponent::TakeDamage(float amount)
 	{
 		onTakenDamage.Notify(amount, m_health, m_maxHealth);

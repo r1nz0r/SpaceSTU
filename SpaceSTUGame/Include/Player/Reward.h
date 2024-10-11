@@ -18,7 +18,7 @@ namespace SSTU
 		virtual void Tick(float deltaTime) override;
 	private:
 		virtual void OnBeginOverlap(Actor* otherActor) override;
-		float mSpeed;
+		float m_speed;
 		RewardFunc mRewardFunc;
 	};
 

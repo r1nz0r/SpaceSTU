@@ -38,6 +38,7 @@ namespace SSTU
 
 	void TwinBladeStage::Finish()
 	{
+		GameStage::Finish();
 		TimerManager::Instance().ClearTimer(m_spawnTimerHandler);
 	}
 }

@@ -10,7 +10,8 @@ namespace SSTU
 		void ChangeHealth(float amount);
 		float GetHealth() const { return m_health; }
 		float GetMaxHealth() const { return m_maxHealth; }
-		
+		void SetInitialHealth(float health, float maxHealth);
+
 		Delegate<float, float, float> onHealthChanged;
 		Delegate<float, float, float> onTakenDamage;
 		Delegate<> onHealthEmpty;

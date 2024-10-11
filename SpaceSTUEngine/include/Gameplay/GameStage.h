@@ -19,10 +19,12 @@ namespace SSTU
 		virtual void Tick(float deltaTime);
 		void FinishInternal();
 		bool IsStageFinished() const { return m_bIsStageFinished; }
+		
+	protected:
+		virtual void Finish();
 
 	private:
 		World* m_world;
 		bool m_bIsStageFinished;
-		virtual void Finish();
 	};
 }

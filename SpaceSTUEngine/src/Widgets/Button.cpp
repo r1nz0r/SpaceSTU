@@ -6,7 +6,7 @@ namespace SSTU
 	Button::Button(const std::string& textString, const std::string& texturePath)
 		: m_buttonTexture(AssetManager::Instance().LoadTexture(texturePath))
 		, m_buttonSprite(*(m_buttonTexture.get()))
-		, m_buttonText("Button", "SpaceShooterRedux/Bonus/kenvector_future.ttf", 30)
+		, m_buttonText(textString, "SpaceShooterRedux/Bonus/kenvector_future.ttf", 30)
 		, m_buttonDefaultColor(128, 128, 128, 255)
 		, m_buttonDownColor(64, 64, 64, 255)
 		, m_buttonHoverColor(190, 190, 190, 255)
@@ -35,6 +35,9 @@ namespace SSTU
 
 	bool Button::HandleEvent(const sf::Event& event)
 	{
+		if (!IsVisible())
+			return false;
+
 		bool handled = false;
 
 		if (event.type == sf::Event::MouseButtonReleased)

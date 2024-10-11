@@ -15,7 +15,7 @@ namespace SSTU
 		);
 
 		virtual void IncrementLevel(int amt = 1) override;
-		//virtual void SetCurrentLevel(int newLevel) override;
+		virtual void SetCurrentLevel(int newLevel) override;
 	private:
 		virtual void ShootImpl() override;
 

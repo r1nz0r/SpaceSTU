@@ -88,6 +88,7 @@ namespace SSTU
 		if (m_pendingWorld && m_pendingWorld != m_currentWorld)
 		{
 			m_currentWorld = m_pendingWorld;
+			PhysicsSystem::Instance().CleanUp();
 			m_currentWorld->BeginPlayInternal();
 		}
 	}

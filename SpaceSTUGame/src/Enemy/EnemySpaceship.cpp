@@ -30,6 +30,14 @@ namespace SSTU
 	void EnemySpaceship::SetScoreReward(int amount)
 	{}
 
+	void EnemySpaceship::SetRewardSpawnWeight(float weight)
+	{
+		if (weight < 0 || weight > 1)
+			return;
+
+		m_rewardSpawnWeight = weight;
+	}
+
 	void EnemySpaceship::SpawnReward()
 	{
 		int pick = static_cast<int>(Math::RandomRange(0, m_rewardFactories.size()));

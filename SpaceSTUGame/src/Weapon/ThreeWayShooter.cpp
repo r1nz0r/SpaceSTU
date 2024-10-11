@@ -25,7 +25,7 @@ namespace SSTU
 		m_topLevelShooterRight.IncrementLevel(amt);
 	}
 
-	/*
+	
 	void ThreeWayShooter::SetCurrentLevel(int level)
 	{
 		Shooter::SetCurrentLevel(level);
@@ -35,7 +35,7 @@ namespace SSTU
 
 		m_topLevelShooterLeft.SetCurrentLevel(level);
 		m_topLevelShooterRight.SetCurrentLevel(level);
-	}*/
+	}
 
 	void ThreeWayShooter::ShootImpl()
 	{

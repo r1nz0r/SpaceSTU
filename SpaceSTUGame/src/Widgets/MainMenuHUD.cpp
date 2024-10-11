@@ -36,10 +36,7 @@ namespace SSTU
 	{
 		m_titleText.SetTextSize(40);
 		m_startButton.SetTextSize(20);
-		m_quitButton.SetTextSize(20);
-
-		m_startButton.SetTextString("Start");
-		m_quitButton.SetTextString("Quit");
+		m_quitButton.SetTextSize(20);	
 
 		sf::Vector2u windowSize = window.getSize();
 		m_titleText.SetLocation(sf::Vector2f(windowSize.x / 2.f, 100.f) - m_titleText.GetCenterPosition());

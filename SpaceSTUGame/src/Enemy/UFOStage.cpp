@@ -24,6 +24,7 @@ namespace SSTU
 
 	void UFOStage::Finish()
 	{
+		GameStage::Finish();
 		TimerManager::Instance().ClearTimer(m_spawnTimer);
 	}
 
