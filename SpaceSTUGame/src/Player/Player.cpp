@@ -7,7 +7,7 @@
 namespace SSTU
 {
 	Player::Player()
-		: m_lifeCount { 1 }
+		: m_lifeCount { 3 }
 		, m_score { 0 }
 		, m_spaceship {}
 	{}

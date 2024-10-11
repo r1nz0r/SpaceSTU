@@ -11,7 +11,7 @@ namespace SSTU
 	class Actor : public Object
 	{
 	public:
-		Actor(World* owner, const std::string& texturePath = "");
+		Actor(World* owner, const std::string& texturePath = "none");
 		virtual ~Actor();
 
 		void BeginPlayInternal();
@@ -19,7 +19,7 @@ namespace SSTU
 		virtual void BeginPlay();
 		virtual void Tick(float deltaTime);
 		void SetTexture(const std::string& texturePath);
-		void Render(sf::RenderWindow& window) const;
+		virtual void Render(sf::RenderWindow& window) const;
 		void SetLocation(const sf::Vector2f& location);
 		sf::Vector2f GetLocation() const;	
 
@@ -54,6 +54,7 @@ namespace SSTU
 		const sf::Sprite& GetSprite() const { return m_sprite; }
 
 		Delegate<Actor*> onActorDestroyed;
+		void SetTextureRepeated(bool repeated);
 
 	protected:
 		World* m_ownerWorld;

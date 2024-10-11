@@ -18,6 +18,7 @@ namespace SSTU
 		virtual void OnAllGameStagesFinished() override;
 		void Restart();
 		void Quit();
+		void SpawnCosmetics();
 
 		std::weak_ptr<PlayerSpaceship> m_playerSpaseship;
 		std::weak_ptr<GameplayHUD> m_gameplayHUD;

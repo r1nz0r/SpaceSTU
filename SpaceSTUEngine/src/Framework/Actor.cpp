@@ -45,19 +45,17 @@ namespace SSTU
 	}
 
 	void Actor::BeginPlay()
-	{
-		//LOG("Actor begin play");
-	}
+	{}
 
 	void Actor::Tick(float deltaTime)
-	{
-		//LOG("Actor Ticking");
-	}
+	{}
 
 	void Actor::SetTexture(const std::string& texturePath)
 	{
+		if (texturePath == "none")
+			return;
+
 		m_texture = AssetManager::Instance().LoadTexture(texturePath);
-		//assert(m_texture);
 		if (!m_texture)
 			return;
 
@@ -186,6 +184,11 @@ namespace SSTU
 	void Actor::ApplyDamage(float amount)
 	{
 
+	}
+
+	void Actor::SetTextureRepeated(bool repeated)
+	{
+		m_texture->setRepeated(repeated);
 	}
 
 	void Actor::EnablePhysics()

@@ -42,14 +42,10 @@ namespace SSTU
 	}
 
 	void World::Tick(float deltaTime)
-	{
-		//LOG("Ticking at framerate: %f", 1.0f / deltaTime);
-	}
+	{}
 
 	void World::BeginPlay()
-	{
-		//LOG("Begin play!");
-	}
+	{}
 
 	void World::RenderHUD(sf::RenderWindow& window)
 	{

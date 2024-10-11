@@ -41,9 +41,7 @@ namespace SSTU
 	}
 
 	void Spaceship::OnHealthChanged(float amount, float health, float maxHealth)
-	{
-		//LOG("Health changed by: %f, and is now: %f/%f", amount, health, maxHealth);
-	}
+	{}
 
 	void Spaceship::OnTakenDamage(float amount, float health, float maxHealth)
 	{

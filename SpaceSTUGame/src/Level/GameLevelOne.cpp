@@ -2,6 +2,8 @@
 #include "Level/GameLevelOne.h"
 #include "Widgets/GameplayHUD.h"
 #include "Framework/Application.h"
+#include "Framework/BackdropActor.h"
+#include "Framework/BackgroundLayer.h"
 
 #include "Enemy/Vanguard.h"
 #include "Enemy/VanguardStage.h"
@@ -18,11 +20,13 @@
 namespace SSTU
 {
 	GameLevelOne::GameLevelOne(Application* owner)
-		: World(owner)
+		: World(owner)	
 	{}
 
 	void GameLevelOne::BeginPlay()
 	{		
+		SpawnCosmetics();
+
 		Player& newPlayer = PlayerManager::Instance().CreateNewPlayer();
 		m_playerSpaseship = newPlayer.SpawnSpaceship(this);
 		m_playerSpaseship.lock()->onActorDestroyed.BindAction(GetWeakPtr(), &GameLevelOne::PlayerSpaceshipDestroyed);
@@ -86,5 +90,64 @@ namespace SSTU
 	void GameLevelOne::Quit()
 	{
 		GetApplication()->Quit();
+	}
+
+	void GameLevelOne::SpawnCosmetics()
+	{
+		auto backdropActor = SpawnActor<BackdropActor>("SpaceShooterRedux/BackGrounds/blue.png");
+		auto planets = SpawnActor<BackgroundLayer>();
+
+		if (planets.expired())
+			return;
+
+		planets.lock()->SetAssets
+		(
+			{
+				"SpaceShooterRedux/PNG/Planets/Planet1.png",
+				"SpaceShooterRedux/PNG/Planets/Planet2.png",
+				"SpaceShooterRedux/PNG/Planets/Planet3.png",
+				"SpaceShooterRedux/PNG/Planets/Planet4.png",
+				"SpaceShooterRedux/PNG/Planets/Planet5.png",
+				"SpaceShooterRedux/PNG/Planets/Planet6.png",
+				"SpaceShooterRedux/PNG/Planets/Planet7.png"
+			}
+		);
+
+		planets.lock()->SetSpritesCount(3);
+		planets.lock()->SetSizes(0.6f, 1.5f);
+		planets.lock()->SetVelocities({ 0.f, 40.f }, { 0.f, 150.f });
+
+		auto meteors = SpawnActor<BackgroundLayer>();
+
+		if (meteors.expired())
+			return;
+
+		meteors.lock()->SetAssets(
+			{
+				"SpaceShooterRedux/PNG/Meteors/meteorGrey_tiny1.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorGrey_tiny2.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorBrown_big1.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorBrown_big2.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorBrown_big3.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorBrown_big4.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorBrown_med1.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorBrown_med3.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorBrown_small1.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorBrown_small2.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorBrown_tiny1.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorBrown_tiny2.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorGrey_big1.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorGrey_big2.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorGrey_big3.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorGrey_big4.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorGrey_med1.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorGrey_med2.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorGrey_small1.png",
+				"SpaceShooterRedux/PNG/Meteors/meteorGrey_small2.png"
+			}
+		);
+
+		meteors.lock()->SetSpritesCount(20);
+		meteors.lock()->SetSizes(0.2f, 0.5f);
 	}
 }

@@ -1,5 +1,4 @@
 #pragma once
-
 #include "Enemy/EnemySpaceship.h"
 #include "Weapon/BulletShooter.h"
 #include "Weapon/ThreeWayShooter.h"
