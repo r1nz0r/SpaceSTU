@@ -29,11 +29,11 @@ cmake -S . -B build
 ```
 2. Соберите проект:
 ```
-cmake --build build
+cmake --build build --config Release
 ```
 3. Запустите игру:
 ```
-./build/SpaceSTU/SpaceSTU.exe
+.\build\SpaceSTUGame\Release\SpaceSTUGame.exe
 ```
 Также можно запустить скрипт ```buildAndRun.bat```, который выполнит все шаги автоматически.
 
