@@ -3,7 +3,7 @@
 namespace SSTU
 {
 	MainMenuHUD::MainMenuHUD()
-		: m_titleText("Light Years")
+		: m_titleText("Space STU")
 		, m_startButton("Start")
 		, m_quitButton("Quit")
 	{
