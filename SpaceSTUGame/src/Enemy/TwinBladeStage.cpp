@@ -2,6 +2,7 @@
 #include "Framework/World.h"
 #include "Framework/Application.h"
 #include "Enemy/TwinBlade.h"
+#include "Weapon/BulletShooter.h"
 
 namespace SSTU
 {

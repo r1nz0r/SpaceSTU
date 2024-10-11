@@ -2,6 +2,7 @@
 #include "Framework/World.h"
 #include "Framework/Application.h"
 #include "Player/PlayerSpaceship.h"
+#include "Weapon/Bullet.h"
 #include "Weapon/BulletShooter.h"
 
 namespace SSTU

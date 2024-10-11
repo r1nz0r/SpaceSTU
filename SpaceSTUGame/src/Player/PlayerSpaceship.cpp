@@ -14,7 +14,7 @@ namespace SSTU
 		: Spaceship(world, path)
 		, m_moveInput()
 		, m_speed(270.0f)
-		, m_shooter(new BulletShooter(this, sf::seconds(0.25f), {50.f, 0.f}))
+		, m_shooter(new BulletShooter(this, sf::seconds(0.20f), {50.f, 0.f}))
 		, m_invulnerableTime(2.0f)
 		, m_bIsInvulnerable(true)
 		, m_invulnerableBlinkInterval(0.5f)

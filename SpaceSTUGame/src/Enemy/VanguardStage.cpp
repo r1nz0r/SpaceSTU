@@ -3,12 +3,13 @@
 #include "Enemy/TwinBlade.h"
 #include "Framework/World.h"
 #include "Framework/Application.h"
+#include "Weapon/BulletShooter.h"
 
 namespace SSTU
 {
 	VanguardStage::VanguardStage(World* world)
 		: GameStage { world }
-		, m_spawnInterval { 1.5f }
+		, m_spawnInterval { 2.1f }
 		, m_switchInterval { 5.f }
 		, m_spawnDistanceToEdge { 100.f }
 		, m_leftSpawnLocation { 0.f, 0.f }

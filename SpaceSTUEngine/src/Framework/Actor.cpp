@@ -204,6 +204,7 @@ namespace SSTU
 			return;
 
 		PhysicsSystem::Instance().RemoveListener(m_physicsBody);
+		m_physicsBody->GetUserData().pointer = reinterpret_cast<uintptr_t>(nullptr);
 		m_physicsBody = nullptr;
 	}
 }
